@@ -1,4 +1,4 @@
-# Custom Cupcake Creator - Product Requirements Document
+# Yomco Custom Cupcake Creator - Product Requirements Document
 
 ## Core Purpose & Success
 - **Mission Statement**: Enable users to design and visualize their perfect cupcake by selecting combinations of flavors, fillings, frostings, and toppings.
@@ -101,7 +101,7 @@
 - **Design System Approach**: Component-based design with reusable elements
 - **Style Guide Elements**: Colors, typography, component styles, and spacing rules
 - **Visual Rhythm**: Consistent card layouts and option displays
-- **Brand Alignment**: Bakery-themed styling throughout
+- **Brand Alignment**: Yomco-themed styling throughout with bakery elements
 
 ### Accessibility & Readability
 - **Contrast Goal**: WCAG AA compliance for all text and UI elements

@@ -74,7 +74,7 @@ function App() {
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center font-['Nunito']">
       <div className="container px-4 py-10 max-w-7xl mx-auto">
         <header className="mb-10 text-center">
-          <h1 className="text-4xl font-bold mb-2 font-['Poppins'] text-primary">Custom Cupcake Creator</h1>
+          <h1 className="text-4xl font-bold mb-2 font-['Poppins'] text-primary">Yomco Custom Cupcake Creator</h1>
           <p className="text-lg text-muted-foreground">Design your perfect cupcake and export the recipe as JSON</p>
         </header>
         
@@ -107,6 +107,9 @@ function App() {
           </div>
         </div>
       </div>
+      <footer className="mt-auto py-4 text-center text-muted-foreground">
+        <p>&copy; {new Date().getFullYear()} Yomco. All rights reserved.</p>
+      </footer>
       <Toaster position="bottom-right" />
     </div>
   );
