@@ -7,6 +7,7 @@ import { CupcakeJson } from "@/components/CupcakeJson";
 import { OrderForm } from "@/components/OrderForm";
 import { OrderHistory } from "@/components/OrderHistory";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowClockwise } from "@phosphor-icons/react";
 import { baseFlavors, frostingOptions, Cupcake } from "@/types/cupcake";
@@ -111,8 +112,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center font-['Nunito']">
-      <div className="container px-4 py-10 max-w-7xl mx-auto">
+    <TooltipProvider delayDuration={300}>
+      <div className="min-h-screen bg-background text-foreground flex flex-col items-center font-['Nunito']">
+        <div className="container px-4 py-10 max-w-7xl mx-auto">
         <header className="mb-8 text-center">
           <div className="flex justify-center items-center gap-2 mb-2">
             <h1 className="text-4xl font-bold font-['Poppins'] text-primary">Yomco Custom Cupcake Creator</h1>
@@ -120,10 +122,15 @@ function App() {
           <p className="text-lg text-muted-foreground">Design your perfect cupcake and submit your order</p>
           <div className="flex justify-center mt-4 gap-2">
             <OrderHistory />
-            <Button variant="outline" className="flex items-center gap-2" onClick={handleReset}>
-              <ArrowClockwise size={18} />
-              Reset Design
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" className="flex items-center gap-2" onClick={handleReset}>
+                  <ArrowClockwise size={18} />
+                  <span className="md:inline hidden">Reset Design</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Start a new cupcake design</TooltipContent>
+            </Tooltip>
           </div>
         </header>
         
@@ -147,13 +154,18 @@ function App() {
                 <CupcakeJson cupcake={cupcake} />
                 
                 <div className="w-full mt-6">
-                  <Button 
-                    className="w-full" 
-                    size="lg"
-                    onClick={() => setActiveTab("order")}
-                  >
-                    Continue to Order
-                  </Button>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        className="w-full" 
+                        size="lg"
+                        onClick={() => setActiveTab("order")}
+                      >
+                        Continue to Order
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Proceed to order submission</TooltipContent>
+                  </Tooltip>
                 </div>
               </div>
               
@@ -213,13 +225,18 @@ function App() {
                   </div>
                   
                   <div className="mt-6">
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => setActiveTab("design")}
-                    >
-                      Back to Design
-                    </Button>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button 
+                          variant="outline" 
+                          className="w-full"
+                          onClick={() => setActiveTab("design")}
+                        >
+                          Back to Design
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Return to cupcake design</TooltipContent>
+                    </Tooltip>
                   </div>
                 </div>
               </div>
@@ -237,6 +254,7 @@ function App() {
       </footer>
       <Toaster position="bottom-right" />
     </div>
+    </TooltipProvider>
   );
 }
 

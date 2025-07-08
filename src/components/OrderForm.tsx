@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { PaperPlaneTilt } from "@phosphor-icons/react";
 import { Cupcake, Order } from "@/types/cupcake";
 import { useUniqueId } from "@/hooks/useUniqueId";
@@ -96,14 +97,19 @@ export function OrderForm({ cupcake, onOrderSubmit }: OrderFormProps) {
             )}
           </div>
           <div className="pt-2">
-            <Button 
-              type="submit"
-              className="w-full flex items-center justify-center gap-2"
-              disabled={submitting}
-            >
-              <PaperPlaneTilt size={18} weight="bold" />
-              {submitting ? "Submitting..." : "Submit Order"}
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-2"
+                  disabled={submitting}
+                >
+                  <PaperPlaneTilt size={18} weight="bold" />
+                  {submitting ? "Submitting..." : "Submit Order"}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Send your cupcake order to Yomco</TooltipContent>
+            </Tooltip>
           </div>
         </form>
       </CardContent>

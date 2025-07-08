@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Check } from "@phosphor-icons/react";
 import { 
   CupcakeBase, 
@@ -45,37 +46,40 @@ export function CupcakeSelector({
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="base" className="w-full">
-          <TabsList className="grid grid-cols-4 mb-4">
-            <TabsTrigger value="base">Base</TabsTrigger>
-            <TabsTrigger value="filling">Filling</TabsTrigger>
-            <TabsTrigger value="frosting">Frosting</TabsTrigger>
-            <TabsTrigger value="toppings">Toppings</TabsTrigger>
+          <TabsList className="w-full grid grid-cols-4 mb-4 overflow-x-auto">
+            <TabsTrigger value="base" className="px-2 md:px-4">Base</TabsTrigger>
+            <TabsTrigger value="filling" className="px-2 md:px-4">Filling</TabsTrigger>
+            <TabsTrigger value="frosting" className="px-2 md:px-4">Frosting</TabsTrigger>
+            <TabsTrigger value="toppings" className="px-2 md:px-4">Toppings</TabsTrigger>
           </TabsList>
           
           <TabsContent value="base" className="space-y-4">
             <h3 className="font-medium text-lg font-['Nunito']">Choose a base flavor</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {baseFlavors.map((base) => (
-                <Button
-                  key={base.id}
-                  variant={selectedBase.id === base.id ? "default" : "outline"}
-                  className="h-auto py-2 justify-start flex-col items-start text-left"
-                  onClick={() => onSelectBase(base)}
-                >
-                  <div className="w-full flex items-center">
-                    <div 
-                      className="w-4 h-4 rounded-full mr-2" 
-                      style={{ backgroundColor: base.color }}
-                    />
-                    <span>{base.name}</span>
-                    {selectedBase.id === base.id && (
-                      <Check className="ml-auto" size={16} />
-                    )}
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1 font-normal">
+                <Tooltip key={base.id}>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={selectedBase.id === base.id ? "default" : "outline"}
+                      className="h-auto py-2 px-3 justify-start items-center text-left w-full truncate"
+                      onClick={() => onSelectBase(base)}
+                    >
+                      <div className="w-full flex items-center gap-2 truncate">
+                        <div 
+                          className="w-4 h-4 flex-shrink-0 rounded-full" 
+                          style={{ backgroundColor: base.color }}
+                        />
+                        <span className="truncate">{base.name}</span>
+                        {selectedBase.id === base.id && (
+                          <Check className="ml-auto flex-shrink-0" size={16} />
+                        )}
+                      </div>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">
                     {base.description}
-                  </p>
-                </Button>
+                  </TooltipContent>
+                </Tooltip>
               ))}
             </div>
           </TabsContent>
@@ -84,29 +88,32 @@ export function CupcakeSelector({
             <h3 className="font-medium text-lg font-['Nunito']">Choose an optional filling</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {fillingOptions.map((filling) => (
-                <Button
-                  key={filling.id}
-                  variant={(selectedFilling && selectedFilling.id === filling.id) ? "default" : "outline"}
-                  className="h-auto py-2 justify-start flex-col items-start text-left"
-                  onClick={() => onSelectFilling(filling.id === 'none' ? null : filling)}
-                >
-                  <div className="w-full flex items-center">
-                    {filling.id !== 'none' && (
-                      <div 
-                        className="w-4 h-4 rounded-full mr-2" 
-                        style={{ backgroundColor: filling.color }}
-                      />
-                    )}
-                    <span>{filling.name}</span>
-                    {(selectedFilling && selectedFilling.id === filling.id) || 
-                     (!selectedFilling && filling.id === 'none') ? (
-                      <Check className="ml-auto" size={16} />
-                    ) : null}
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1 font-normal">
+                <Tooltip key={filling.id}>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={(selectedFilling && selectedFilling.id === filling.id) ? "default" : "outline"}
+                      className="h-auto py-2 px-3 justify-start items-center text-left w-full truncate"
+                      onClick={() => onSelectFilling(filling.id === 'none' ? null : filling)}
+                    >
+                      <div className="w-full flex items-center gap-2 truncate">
+                        {filling.id !== 'none' && (
+                          <div 
+                            className="w-4 h-4 flex-shrink-0 rounded-full" 
+                            style={{ backgroundColor: filling.color }}
+                          />
+                        )}
+                        <span className="truncate">{filling.name}</span>
+                        {(selectedFilling && selectedFilling.id === filling.id) || 
+                         (!selectedFilling && filling.id === 'none') ? (
+                          <Check className="ml-auto flex-shrink-0" size={16} />
+                        ) : null}
+                      </div>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">
                     {filling.description}
-                  </p>
-                </Button>
+                  </TooltipContent>
+                </Tooltip>
               ))}
             </div>
           </TabsContent>
@@ -115,26 +122,29 @@ export function CupcakeSelector({
             <h3 className="font-medium text-lg font-['Nunito']">Choose a frosting style</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {frostingOptions.map((frosting) => (
-                <Button
-                  key={frosting.id}
-                  variant={selectedFrosting.id === frosting.id ? "default" : "outline"}
-                  className="h-auto py-2 justify-start flex-col items-start text-left"
-                  onClick={() => onSelectFrosting(frosting)}
-                >
-                  <div className="w-full flex items-center">
-                    <div 
-                      className="w-4 h-4 rounded-full mr-2" 
-                      style={{ backgroundColor: frosting.color }}
-                    />
-                    <span>{frosting.name}</span>
-                    {selectedFrosting.id === frosting.id && (
-                      <Check className="ml-auto" size={16} />
-                    )}
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1 font-normal">
+                <Tooltip key={frosting.id}>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={selectedFrosting.id === frosting.id ? "default" : "outline"}
+                      className="h-auto py-2 px-3 justify-start items-center text-left w-full truncate"
+                      onClick={() => onSelectFrosting(frosting)}
+                    >
+                      <div className="w-full flex items-center gap-2 truncate">
+                        <div 
+                          className="w-4 h-4 flex-shrink-0 rounded-full" 
+                          style={{ backgroundColor: frosting.color }}
+                        />
+                        <span className="truncate">{frosting.name}</span>
+                        {selectedFrosting.id === frosting.id && (
+                          <Check className="ml-auto flex-shrink-0" size={16} />
+                        )}
+                      </div>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">
                     {frosting.description} ({frosting.style} style)
-                  </p>
-                </Button>
+                  </TooltipContent>
+                </Tooltip>
               ))}
             </div>
           </TabsContent>
@@ -147,36 +157,39 @@ export function CupcakeSelector({
                 const isDisabled = selectedToppings.length >= 3 && !isSelected;
                 
                 return (
-                  <Button
-                    key={topping.id}
-                    variant={isSelected ? "default" : "outline"}
-                    className={`h-auto py-2 justify-start flex-col items-start text-left ${isDisabled ? 'opacity-50' : ''}`}
-                    onClick={() => isSelected ? onRemoveTopping(topping.id) : !isDisabled && onAddTopping(topping)}
-                    disabled={isDisabled}
-                  >
-                    <div className="w-full flex items-center">
-                      {topping.id !== 'sprinkles' ? (
-                        <div 
-                          className="w-4 h-4 rounded-full mr-2" 
-                          style={{ backgroundColor: topping.color === '#MULTIPLE' ? 'linear-gradient(to right, #FF5A60, #4A5AAD, #FDE151, #CCFFE5)' : topping.color }}
-                        />
-                      ) : (
-                        <div className="w-4 h-4 mr-2 flex">
-                          <div className="w-1 h-4 bg-[#FF5A60]"></div>
-                          <div className="w-1 h-4 bg-[#4A5AAD]"></div>
-                          <div className="w-1 h-4 bg-[#FDE151]"></div>
-                          <div className="w-1 h-4 bg-[#CCFFE5]"></div>
+                  <Tooltip key={topping.id}>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant={isSelected ? "default" : "outline"}
+                        className={`h-auto py-2 px-3 justify-start items-center text-left w-full truncate ${isDisabled ? 'opacity-50' : ''}`}
+                        onClick={() => isSelected ? onRemoveTopping(topping.id) : !isDisabled && onAddTopping(topping)}
+                        disabled={isDisabled}
+                      >
+                        <div className="w-full flex items-center gap-2 truncate">
+                          {topping.id !== 'sprinkles' ? (
+                            <div 
+                              className="w-4 h-4 flex-shrink-0 rounded-full" 
+                              style={{ backgroundColor: topping.color === '#MULTIPLE' ? '#FF5A60' : topping.color }}
+                            />
+                          ) : (
+                            <div className="w-4 h-4 flex-shrink-0 mr-2 flex">
+                              <div className="w-1 h-4 bg-[#FF5A60]"></div>
+                              <div className="w-1 h-4 bg-[#4A5AAD]"></div>
+                              <div className="w-1 h-4 bg-[#FDE151]"></div>
+                              <div className="w-1 h-4 bg-[#CCFFE5]"></div>
+                            </div>
+                          )}
+                          <span className="truncate">{topping.name}</span>
+                          {isSelected && (
+                            <Check className="ml-auto flex-shrink-0" size={16} />
+                          )}
                         </div>
-                      )}
-                      <span>{topping.name}</span>
-                      {isSelected && (
-                        <Check className="ml-auto" size={16} />
-                      )}
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-1 font-normal">
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">
                       {topping.description}
-                    </p>
-                  </Button>
+                    </TooltipContent>
+                  </Tooltip>
                 );
               })}
             </div>

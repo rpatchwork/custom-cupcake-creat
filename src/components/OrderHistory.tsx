@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { List, MagnifyingGlass, Package, X } from "@phosphor-icons/react";
 import { Order } from "@/types/cupcake";
 
@@ -47,10 +48,17 @@ export function OrderHistory() {
     <>
       <Dialog open={isDetailOpen} onOpenChange={setIsDetailOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline" className="flex items-center gap-2">
-            <List size={18} />
-            Order History ({orders.length})
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" className="flex items-center gap-2">
+                <List size={18} />
+                <span className="md:inline hidden">Order History</span>
+                <span className="inline md:hidden">Orders</span>
+                <span className="bg-muted text-muted-foreground rounded-full px-2 py-0.5 text-xs">{orders.length}</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>View all submitted orders</TooltipContent>
+          </Tooltip>
         </DialogTrigger>
         
         <DialogContent className="max-w-4xl">
@@ -92,13 +100,18 @@ export function OrderHistory() {
                             </Badge>
                           </TableCell>
                           <TableCell className="text-right">
-                            <Button 
-                              size="sm" 
-                              variant="ghost" 
-                              onClick={() => viewOrderDetails(order)}
-                            >
-                              <MagnifyingGlass size={16} />
-                            </Button>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button 
+                                  size="sm" 
+                                  variant="ghost" 
+                                  onClick={() => viewOrderDetails(order)}
+                                >
+                                  <MagnifyingGlass size={16} />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>View details</TooltipContent>
+                            </Tooltip>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -155,9 +168,14 @@ export function OrderHistory() {
                     </div>
                     
                     <div className="pt-2 flex justify-end">
-                      <Button variant="outline" onClick={() => setSelectedOrder(null)}>
-                        Select Different Order
-                      </Button>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" onClick={() => setSelectedOrder(null)}>
+                            Select Different Order
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Return to order list</TooltipContent>
+                      </Tooltip>
                     </div>
                   </div>
                 ) : (
@@ -179,10 +197,15 @@ export function OrderHistory() {
           )}
           
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDetailOpen(false)}>
-              <X size={16} className="mr-2" />
-              Close
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" onClick={() => setIsDetailOpen(false)}>
+                  <X size={16} className="mr-2" />
+                  Close
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Close order history</TooltipContent>
+            </Tooltip>
           </DialogFooter>
         </DialogContent>
       </Dialog>
