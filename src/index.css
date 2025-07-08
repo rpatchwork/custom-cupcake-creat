@@ -1,1 +1,96 @@
-/* This is where custom CSS goes */
+@import 'tailwindcss';
+@import "tw-animate-css";
+
+@layer base {
+  * {
+    @apply border-border
+  }
+}
+
+:root {
+  /* Base colors */
+  --background: oklch(0.97 0.02 83);  /* Cream #FFF8E7 */
+  --foreground: oklch(0.2 0.01 83);   /* Dark Gray #1A1A1A */
+  
+  --card: oklch(1 0 0);               /* White #FFFFFF */
+  --card-foreground: oklch(0.2 0.01 83); /* Dark Gray #1A1A1A */
+  
+  --popover: oklch(1 0 0);            /* White #FFFFFF */
+  --popover-foreground: oklch(0.2 0.01 83); /* Dark Gray #1A1A1A */
+  
+  /* Action colors */
+  --primary: oklch(0.64 0.25 0);       /* Raspberry #D81B60 */
+  --primary-foreground: oklch(1 0 0);   /* White #FFFFFF */
+  
+  --secondary: oklch(0.88 0.07 174);    /* Mint green #C1E8E0 */
+  --secondary-foreground: oklch(0.2 0.01 83); /* Dark Gray #1A1A1A */
+  
+  --accent: oklch(0.9 0.1 5);          /* Soft pink #FFD6E0 */
+  --accent-foreground: oklch(0.2 0.01 83); /* Dark Gray #1A1A1A */
+  
+  --destructive: oklch(0.64 0.2 30);    /* Red #E53935 */
+  --destructive-foreground: oklch(1 0 0); /* White #FFFFFF */
+  
+  /* Supporting UI colors */
+  --muted: oklch(0.96 0.01 83);        /* Light gray #F3F3F3 */
+  --muted-foreground: oklch(0.5 0.01 83); /* Mid gray #737373 */
+  
+  --border: oklch(0.9 0.03 83);        /* Light border #E5E5E5 */
+  --input: oklch(0.9 0.03 83);         /* Light border #E5E5E5 */
+  
+  --ring: oklch(0.64 0.25 0);          /* Raspberry #D81B60 */
+  
+  /* Border radius */
+  --radius: 0.75rem;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  /* Map radius variables */
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 1.5);
+  --radius-xl: calc(var(--radius) * 2);
+  --radius-2xl: calc(var(--radius) * 3);
+  --radius-full: 9999px;
+}
+
+/* Custom classes for cupcake parts */
+.cupcake-base {
+  transition: background-color 0.3s ease;
+}
+
+.cupcake-filling {
+  transition: all 0.3s ease;
+}
+
+.cupcake-frosting {
+  transition: all 0.3s ease;
+}
+
+.cupcake-topping {
+  transition: transform 0.2s ease-in-out;
+}
+
+.cupcake-topping:hover {
+  transform: scale(1.05);
+}
