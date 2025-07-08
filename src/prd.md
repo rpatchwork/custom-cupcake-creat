@@ -1,22 +1,22 @@
 # Yomco Custom Cupcake Creator - Product Requirements Document
 
 ## Core Purpose & Success
-- **Mission Statement**: Enable users to design and visualize their perfect cupcake by selecting combinations of flavors, fillings, frostings, and toppings.
-- **Success Indicators**: Users can create custom cupcake designs and export the design as JSON.
+- **Mission Statement**: Enable users to design, visualize, and order their perfect cupcake by selecting combinations of flavors, fillings, frostings, and toppings.
+- **Success Indicators**: Users can create custom cupcake designs, submit orders, and view their order history.
 - **Experience Qualities**: Delightful, Intuitive, Visually appealing
 
 ## Project Classification & Approach
 - **Complexity Level**: Light Application (multiple features with basic state)
-- **Primary User Activity**: Creating (designing cupcakes with visual feedback)
+- **Primary User Activity**: Creating (designing cupcakes with visual feedback) and Ordering (submitting cupcake orders)
 
 ## Thought Process for Feature Selection
-- **Core Problem Analysis**: Users want to customize every aspect of a cupcake but need a visual way to see their creation.
+- **Core Problem Analysis**: Users want to customize every aspect of a cupcake, visualize their creation, and place orders for their designs.
 - **User Context**: Users will engage with this site when planning special events, ordering custom cupcakes, or simply exploring creative possibilities.
-- **Critical Path**: Select base cupcake flavor → Add optional filling → Choose frosting style and flavor → Add toppings → Generate JSON specification
+- **Critical Path**: Select base cupcake flavor → Add optional filling → Choose frosting style and flavor → Add toppings → Provide email → Submit order
 - **Key Moments**: 
   1. Visual updating of the cupcake as options are selected
-  2. Finalizing the design and seeing the complete JSON specification
-  3. Selecting and customizing toppings from a visually appealing menu
+  2. Submitting an order and receiving confirmation
+  3. Reviewing previous orders in the order history
 
 ## Essential Features
 1. **Cupcake Base Selection**
@@ -39,7 +39,17 @@
    - Why it matters: Personalizes the cupcake and makes it unique
    - Success criteria: Users can add multiple toppings in different combinations
 
-5. **JSON Generation**
+5. **Order Submission**
+   - What it does: Allows users to submit their cupcake design as an order with their email
+   - Why it matters: Completes the customer journey from design to purchase
+   - Success criteria: Orders are stored and accessible in order history
+
+6. **Order History**
+   - What it does: Displays a list of all submitted orders with details
+   - Why it matters: Provides accountability and record-keeping for both users and the bakery
+   - Success criteria: Users can access detailed information about past orders
+
+7. **JSON Generation**
    - What it does: Creates a JSON specification of the complete cupcake design
    - Why it matters: Provides a standardized way to save and share designs
    - Success criteria: JSON accurately represents all selected components
@@ -89,11 +99,11 @@
 - **Contextual Appropriateness**: Playful but not distracting animations that enhance the experience
 
 ### UI Elements & Component Selection
-- **Component Usage**: Cards for option groups, buttons for selections, dialogs for confirmation
+- **Component Usage**: Cards for option groups, buttons for selections, dialogs for order history, tabs for workflow sections
 - **Component Customization**: Rounded corners on cards and buttons for a soft, friendly feel
 - **Component States**: Clear hover and active states for interactive elements
 - **Icon Selection**: Food and bakery themed icons where appropriate
-- **Component Hierarchy**: Primary actions (finalize design) vs secondary actions (change options)
+- **Component Hierarchy**: Primary actions (submit order) vs secondary actions (change options)
 - **Spacing System**: Consistent 4px-based spacing scale (0.5rem, 1rem, 1.5rem, 2rem)
 - **Mobile Adaptation**: Full-width cards and scrollable sections on smaller screens
 
@@ -110,13 +120,14 @@
 - **Potential Obstacles**: Users might want combinations that are difficult to visualize
 - **Edge Case Handling**: Provide warnings for unusual combinations but allow creativity
 - **Technical Constraints**: Need to handle many visual combinations efficiently
+- **Order Management**: Store orders locally with user email for retrieval
 
 ## Implementation Considerations
-- **Scalability Needs**: System should allow for adding new flavors, frostings, and toppings
-- **Testing Focus**: Validate that all combinations render correctly
-- **Critical Questions**: How detailed should the visualization be vs. performance?
+- **Scalability Needs**: System should allow for adding new flavors, frostings, toppings, and managing growing order volumes
+- **Testing Focus**: Validate that all combinations render correctly and orders are properly stored
+- **Critical Questions**: How to provide meaningful order status updates without a backend system?
 
 ## Reflection
 - This approach uniquely balances visual delight with functional customization, making it accessible to both casual users and serious bakers.
 - We've assumed users will understand basic cupcake terminology and components.
-- What would make this exceptional is realistic 3D rendering of the cupcake as it's being designed.
+- What would make this exceptional is realistic 3D rendering of the cupcake and integration with a real ordering system.

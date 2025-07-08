@@ -5,6 +5,14 @@ export interface Cupcake {
   toppings: CupcakeTopping[];
 }
 
+export interface Order {
+  id: string;
+  cupcake: Cupcake;
+  email: string;
+  date: string;
+  status: OrderStatus;
+}
+
 export interface CupcakeBase {
   id: string;
   name: string;
@@ -36,6 +44,8 @@ export interface CupcakeTopping {
 }
 
 export type FrostingStyle = 'swirl' | 'smooth' | 'textured' | 'drizzle';
+
+export type OrderStatus = 'pending' | 'confirmed' | 'completed' | 'cancelled';
 
 // Default options data
 export const baseFlavors: CupcakeBase[] = [
